@@ -1,18 +1,19 @@
 @ECHO OFF
+chcp 65001 >nul
 setlocal EnableDelayedExpansion
   
 PUSHD %~DP0 & cd /d "%~dp0"
 %1 %2
 mshta vbscript:createobject("shell.application").shellexecute("%~s0","goto :runas","","runas",1)(window.close)&goto :eof
 :runas
-echo Successfully ran as administrator.
+echo 成功以管理员身份运行。
 
-@rem LunarClientTools v1.9 by Vaption
-@rem https://github.com/Vaption/LunarClientTools
-@rem Please report any issues on Github
+@rem LunarClientTools v1.9 by GrushTom
+@rem https://github.com/GrushTom/LunarClientTools
+@rem 请在 Github 上报告任何问题
 
 @rem MIT License
-@rem Copyright (c) 2024 Vaption ✨
+@rem Copyright (c) 2024 GrushTom ✨
 
 @rem Permission is hereby granted, free of charge, to any person obtaining a copy
 @rem of this software and associated documentation files (the "Software"), to deal
@@ -36,19 +37,19 @@ echo Successfully ran as administrator.
 TITLE LunarClientTools v1.9
 
 echo [90m###################################################################[0m
-echo [90m##[0m                  [96mLunar Client Tools Script[0m                    [90m##[0m
-echo [90m##[0m          [36mhttps://github.com/Vaption/LunarClientTools[0m          [90m##[0m
+echo [90m##[0m                  [96mLunar Client 工具脚本[0m                    [90m##[0m
+echo [90m##[0m          [36mhttps://github.com/GrushTom/LunarClientTools[0m          [90m##[0m
 echo [90m###################################################################[0m
 echo.
-echo [92mWhat are you trying to do?[0m
+echo [92m您想要做什么？[0m
 echo.
-echo [91m1.[0m [97mClear Cached Files[0m
-echo [91m2.[0m [97mNavigate to .lunarclient[0m
-echo [91m3.[0m [97mProfile Management Options[0m
-echo [91m4.[0m [97mSwitch LunarClient's GPU to Dedicated/Integrated[0m
-echo [91m5.[0m [97mExit[0m
+echo [91m1.[0m [97m清除缓存文件[0m
+echo [91m2.[0m [97m导航到 .lunarclient 文件夹[0m
+echo [91m3.[0m [97m配置文件管理选项[0m
+echo [91m4.[0m [97m切换 LunarClient 的 GPU 为独立/集成显卡[0m
+echo [91m5.[0m [97m退出[0m
 echo.
-set /P M=[96mType[0m [91m1-5[0m [96mand then press enter[0m[91m:[0m
+set /P M=[96m请输入[0m [91m1-5[0m [96m然后按回车键[0m[91m:[0m
 if %M%==1 goto :cache-rem
 if %M%==2 goto :lc-folder
 if %M%==3 goto :json-menu
@@ -64,20 +65,20 @@ goto :menu
 :json-menu
 cls
 echo [90m###################################################################[0m
-echo [90m##[0m                  [96mLunar Client Tools Script[0m                    [90m##[0m
-echo [90m##[0m          [36mhttps://github.com/Vaption/LunarClientTools[0m          [90m##[0m
+echo [90m##[0m                  [96mLunar Client 工具脚本[0m                    [90m##[0m
+echo [90m##[0m          [36mhttps://github.com/GrushTom/LunarClientTools[0m          [90m##[0m
 echo [90m###################################################################[0m
 echo.
-echo [92mProfile Management Options[0m
+echo [92m配置文件管理选项[0m
 echo.
-echo [91m1.[0m [97mImport Profiles From the Archive[0m
-echo [91m2.[0m [97mList All Present Profiles in the Directory[0m
-echo [91m3.[0m [97mAutodetect Profiles and Replace Current Profile Manager[0m
-echo [91m4.[0m [97mManual Profile Manager Generator[0m
-echo [91m5.[0m [97mExport Current Profiles to Desktop[0m
-echo [91m6.[0m [97mCancel[0m
+echo [91m1.[0m [97m从存档导入配置文件[0m
+echo [91m2.[0m [97m列出目录中所有现有的配置文件[0m
+echo [91m3.[0m [97m自动检测配置文件并替换当前配置文件管理器[0m
+echo [91m4.[0m [97m手动配置文件管理器生成器[0m
+echo [91m5.[0m [97m导出当前配置文件到桌面[0m
+echo [91m6.[0m [97m取消[0m
 echo.
-set /P M=[96mType[0m [91m1-6[0m [96mand then press enter[0m[91m:[0m
+set /P M=[96m请输入[0m [91m1-6[0m [96m然后按回车键[0m[91m:[0m
 if %M%==1 goto :json-archive
 if %M%==2 goto :json-list
 if %M%==3 goto :json-auto
@@ -101,11 +102,11 @@ powershell -Command "$url = 'https://raw.githubusercontent.com/Vaption/LunarClie
 Powershell -Nop -C "$profiles = (Get-Content '%userprofile%\.lunarclient\.lct-cache\data.json' | ConvertFrom-Json).profiles; foreach ($profile in $profiles) { $profile.link | Out-File -FilePath ('%userprofile%\.lunarclient\.lct-cache\{0}.txt' -f $profile.name) }"
 cls
 echo [90m###################################################################[0m
-echo [90m##[0m                  [96mLunar Client Tools Script[0m                    [90m##[0m
-echo [90m##[0m          [36mhttps://github.com/Vaption/LunarClientTools[0m          [90m##[0m
+echo [90m##[0m                  [96mLunar Client 工具脚本[0m                    [90m##[0m
+echo [90m##[0m          [36mhttps://github.com/GrushTom/LunarClientTools[0m          [90m##[0m
 echo [90m###################################################################[0m
 echo.
-echo [92mScanning current available profiles...[0m
+echo [92m正在扫描当前可用的配置文件...[0m
 timeout /t 3 /nobreak >nul
 set "settingsFolder=%userprofile%\.lunarclient\settings\game"
 set /a totalProfiles=0
@@ -113,9 +114,9 @@ for /d %%i in ("%settingsFolder%\*") do (
     set /a totalProfiles+=1
 )
 if %totalProfiles% gtr 7 (
-    echo [31mError: More than seven profiles are present![0m
-    echo [31mMaximum amount of profiles allowed is eight, importing profiles isn't possible.[0m
-    echo [31mPlease navigate to .lunarclient\settings\game and remove some profiles before running the command.[0m
+    echo [31m错误：存在超过七个配置文件！[0m
+    echo [31m允许的最大配置文件数量为八个，无法导入配置文件。[0m
+    echo [31m请导航到 .lunarclient\settings\game 并在运行命令前删除一些配置文件。[0m
     pause >nul
     exit /b
 ) else (
@@ -134,11 +135,11 @@ for %%F in ("%folderPath%\*.txt") do (
         set "file[!count!]=%%~nF"
     )
 )
-echo [97mAvailable Profiles on the Archive:[0m
+echo [97m存档中可用的配置文件：[0m
 for /l %%N in (1,1,!count!) do (
     echo %%N. !file[%%N]!
 )
-set /p choice=[96mEnter the number of the profile you want to import[0m[91m:[0m
+set /p choice=[96m请输入您要导入的配置文件编号[0m[91m:[0m
 if defined file[%choice%] (
     set "fileName=!file[%choice%]!.txt"
     set "filePath=%folderPath%\!fileName!"
@@ -157,17 +158,17 @@ if defined file[%choice%] (
             goto :json-archive-downloader
         )
     ) else (
-        echo [91mThe selected profile does not exist. Exiting...[0m
+        echo [91m所选配置文件不存在。正在退出...[0m
         timeout 3 >nul
         goto :menu
     )
 )
 @rem Download profiles from the archive and extract it, using powershell
 :json-archive-downloader
-echo [96mAttempting to download the profile from the archive...[0m
+echo [96m尝试从存档下载配置文件...[0m
 timeout 2 >nul
 powershell -Command "$url = '!downloadLink!'; $filename = [System.IO.Path]::GetFileName($url); wget -Uri $url -OutFile ('%userprofile%\.lunarclient\settings\game\' + $filename); Expand-Archive -Path ('%userprofile%\.lunarclient\settings\game\' + $filename) -DestinationPath ('%userprofile%\.lunarclient\settings\game\' + [System.IO.Path]::GetFileNameWithoutExtension($filename)) -Force"
-echo [32mProfile imported successfully, attempting to generate the new profile_manager.json...[0m
+echo [32m配置文件导入成功，尝试生成新的 profile_manager.json...[0m
 timeout 2 >nul
 goto :json-auto
 pause >nul
@@ -178,7 +179,7 @@ goto :menu
 echo.
 @echo off
 setlocal
-echo [32mScanning your profiles directory...[0m
+echo [32m正在扫描您的配置文件目录...[0m
 timeout /t 4 /nobreak >nul
 set "path=%userprofile%\.lunarclient\settings\game"
 set count=0
@@ -186,7 +187,7 @@ set count=0
 for /d %%G in ("%path%\*") do (
     set /a count+=1
 )
-echo [92mYou have a total of %count%/8 profiles:[0m
+echo [92m您总共有 %count%/8 个配置文件：[0m
 echo.
 
 for /d %%G in ("%path%\*") do (
@@ -206,12 +207,12 @@ setlocal enabledelayedexpansion
 set "settingsFolder=%userprofile%\.lunarclient\settings\game"
 
 if not exist "%settingsFolder%" (
-    echo [91mThe settings folder does not exist in .lunarclient[0m
-    echo [91mLCT was unable to detect any profile in your settings directory.[0m
+    echo [91m.lunarclient 中不存在设置文件夹[0m
+    echo [91mLCT 无法在您的设置目录中检测到任何配置文件。[0m
     pause >nul
     exit /b
 )
-echo [92mScanning the settings folder...[0m
+echo [92m正在扫描设置文件夹...[0m
 timeout /t 3 /nobreak >nul
 set /a totalProfiles=0
 for /d %%i in ("%settingsFolder%\*") do (
@@ -219,8 +220,8 @@ for /d %%i in ("%settingsFolder%\*") do (
 )
 @rem Show an error if the user has more than eight profiles, as that's the limit
 if %totalProfiles% gtr 8 (
-    echo [31mError: More than eight profiles are present![0m
-    echo [31mPlease navigate to .lunarclient\settings\game and remove some profiles before running the command.[0m
+    echo [31m错误：存在超过八个配置文件！[0m
+    echo [31m请导航到 .lunarclient\settings\game 并在运行命令前删除一些配置文件。[0m
     del "%userprofile%"\.lunarclient\.lct-cache\* /Q 2>nul
     rmdir /s /q "%userprofile%"\.lunarclient\.lct-cache\ 2>nul
     pause >nul
@@ -230,12 +231,12 @@ if %totalProfiles% gtr 8 (
 )
 @rem Automatically generate and replace profile_manager.json based on the profile folder available
 :json-auto-action
-echo [92mFound %totalProfiles% profiles in the settings folder.[0m
-echo [92mTerminating launcher processes...[0m
+echo [92m在设置文件夹中找到 %totalProfiles% 个配置文件。[0m
+echo [92m正在终止启动器进程...[0m
 taskkill /im "Lunar Client.exe" /f 2>nul
 timeout /t 2 /nobreak >nul
-echo [32mTask completed.[0m
-echo [32mGenerating profiles...[0m
+echo [32m任务完成。[0m
+echo [32m正在生成配置文件...[0m
 timeout /t 3 /nobreak >nul
 set "jsonContent=["
 
@@ -254,8 +255,8 @@ set "jsonContent=!jsonContent!]"
     
 > "%userprofile%\.lunarclient\settings\game\profile_manager.json" echo !jsonContent!
 echo.
-echo [32mSuccessfully generated and replaced profile_manager.json[0m
-echo [32mOperation successful.[0m
+echo [32m成功生成并替换 profile_manager.json[0m
+echo [32m操作成功。[0m
 del "%userprofile%"\.lunarclient\.lct-cache\* /Q 2>nul
 rmdir /s /q "%userprofile%"\.lunarclient\.lct-cache\ 2>nul
 pause >nul
@@ -266,26 +267,26 @@ goto :menu
 @echo off
 setlocal enabledelayedexpansion
 
-echo [36mEnter the total number of profiles you want to add (Max=8):[0m
+echo [36m请输入要添加的配置文件总数（最大=8）：[0m
 set /p totalProfiles=
 
 if %totalProfiles% gtr 8 (
-    echo [31mError: Maximum number of profiles exceeded. Please enter a number between 1 and 8.[0m
+    echo [31m错误：超过最大配置文件数量。请输入 1 到 8 之间的数字。[0m
     pause >nul
     cls
     goto :menu
 )
 
-echo [32mGenerating profiles...[0m
+echo [32m正在生成配置文件...[0m
 echo.
 
 set "jsonContent=["
 
 for /l %%i in (1, 1, %totalProfiles%) do (
-    echo [96mProfile %%i[0m
-    echo [93mEnter the name for profile %%i:[0m
+    echo [96m配置文件 %%i[0m
+    echo [93m请输入配置文件 %%i 的名称：[0m
     set /p profileName=
-    echo [93mEnter the display name for profile %%i:[0m
+    echo [93m请输入配置文件 %%i 的显示名称：[0m
     set /p displayName=
     
     if %%i==1 (
@@ -301,7 +302,7 @@ set "jsonContent=!jsonContent!]"
     
 > "%userprofile%\Desktop\profile_manager.json" echo !jsonContent!
 echo.
-echo [32mSuccessfully generated profile_manager.json on your desktop.[0m
+echo [32m成功在您的桌面上生成 profile_manager.json。[0m
 echo.
 echo.
 pause >nul
@@ -312,7 +313,7 @@ goto :menu
 echo.
 echo.
 echo.
-choice /N /C YC /M "Are you sure you want to proceed? Press Y to Continue, Press C to Cancel"%1
+choice /N /C YC /M "确定要继续吗？按 Y 继续，按 C 取消"%1
 IF ERRORLEVEL==2 goto :menu
 IF ERRORLEVEL==1 goto :json-backup-action
 :json-backup-action
@@ -331,8 +332,8 @@ del "%userprofile%"\Desktop\LCT-Profiles\muted_users.json
 del "%userprofile%"\Desktop\LCT-Profiles\rule-features.json
 del "%userprofile%"\Desktop\LCT-Profiles\statistics.json
 del "%userprofile%"\Desktop\LCT-Profiles\version
-echo [32mSuccessfully copied your profiles to your desktop.[0m
-echo [92mFile Path: "%userprofile%"\Desktop\LCT-Profiles[0m
+echo [32m成功将您的配置文件复制到桌面。[0m
+echo [92m文件路径："%userprofile%"\Desktop\LCT-Profiles[0m
 %SystemRoot%\explorer.exe "%userprofile%\Desktop\LCT-Profiles\"
 echo.
 echo.
@@ -345,12 +346,12 @@ goto :menu
 echo.
 echo.
 echo.
-choice /N /C YC /M "Are you sure you want to proceed? Press Y to Continue, Press C to Cancel"%1
+choice /N /C YC /M "确定要继续吗？按 Y 继续，按 C 取消"%1
 IF ERRORLEVEL==2 goto :menu
 IF ERRORLEVEL==1 goto :cache-rem-action
 :cache-rem-action
 del "%userprofile%"\.lunarclient\offline\multiver\cache\* /Q > nul
-echo [32mSuccessfully deleted LunarClient game cache.[0m
+echo [32m成功删除 LunarClient 游戏缓存。[0m
 echo.
 echo.
 echo.
@@ -363,7 +364,7 @@ echo.
 echo.
 echo.
 %SystemRoot%\explorer.exe "%userprofile%\.lunarclient\"
-echo [32mSuccessfully opened .lunarclient in a new window.[0m
+echo [32m成功在新窗口中打开 .lunarclient。[0m
 echo.
 echo.
 echo.
@@ -375,12 +376,12 @@ goto :menu
 echo.
 echo.
 echo.
-choice /N /C DI /M "Which Graphics Processor are you trying to switch to? Press D for Dedicated, Press I for Integrated"%1
+choice /N /C DI /M "您想切换到哪种图形处理器？按 D 选择独立显卡，按 I 选择集成显卡"%1
 IF ERRORLEVEL==2 goto :igpu-dgpu-dedicated
 IF ERRORLEVEL==1 goto :igpu-dgpu-integrated
 @rem Confirm
 :igpu-dgpu-integrated
-choice /N /C YC /M "Are you sure you want to proceed? Press Y to Continue, Press C to Cancel"%1
+choice /N /C YC /M "确定要继续吗？按 Y 继续，按 C 取消"%1
 IF ERRORLEVEL==2 goto :menu
 IF ERRORLEVEL==1 goto :igpu-dgpu-action-integrated
 :igpu-dgpu-action-integrated
@@ -402,10 +403,10 @@ for /d %%i in ("%root_directory%\*") do (
 if defined javaw_path (
     reg Add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\DirectX\UserGpuPreferences" /v "%javaw_path%javaw.exe" /d "GpuPreference=1;" /f
     color 0A
-    echo Successfully switched LunarClient's GPU to Power Saving.
+    echo 成功将 LunarClient 的 GPU 切换到节能模式。
 ) else (
     color 0C
-    echo LCT was unable to locate javaw.exe, relaunch the game for the file to be redownloaded.
+    echo LCT 无法找到 javaw.exe，请重新启动游戏以下载该文件。
 )
 echo.
 echo.
@@ -414,7 +415,7 @@ cls
 goto :menu
 @rem Confirm (again)
 :igpu-dgpu-dedicated
-choice /N /C YC /M "Are you sure you want to proceed? Press Y to Continue, Press C to Cancel"%1
+choice /N /C YC /M "确定要继续吗？按 Y 继续，按 C 取消"%1
 IF ERRORLEVEL==2 goto :menu
 IF ERRORLEVEL==1 goto :igpu-dgpu-action-dedicated
 :igpu-dgpu-action-dedicated
@@ -436,10 +437,10 @@ for /d %%i in ("%root_directory%\*") do (
 if defined javaw_path (
     reg Add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\DirectX\UserGpuPreferences" /v "%javaw_path%javaw.exe" /d "GpuPreference=2;" /f
     color 0A
-    echo Successfully switched LunarClient's GPU to High Performance.
+    echo 成功将 LunarClient 的 GPU 切换到高性能模式。
 ) else (
     color 0C
-    echo LCT was unable to locate javaw.exe, relaunch the game for the file to be redownloaded.
+    echo LCT 无法找到 javaw.exe，请重新启动游戏以下载该文件。
 )
 echo.
 echo.
@@ -452,11 +453,11 @@ exit
 
 @rem Unsupported windows version error
 :windows-error
-echo [90m#############################[0m [31mERROR[0m [90m###############################[0m
+echo [90m#############################[0m [31m错误[0m [90m###############################[0m
 echo [90m#[0m                                                                 [90m#[0m
-echo [90m#[0m          [91mThis script only works on Windows 10 and above.[0m           [90m#[0m
-echo [90m#[0m         [91mYour current Windows version is not supported[0m           [90m#[0m
-echo [90m#[0m     [91mIf you believe this is an issue, open an issue on Github[0m    [90m#[0m
+echo [90m#[0m          [91m此脚本仅适用于 Windows 10 及以上版本。[0m           [90m#[0m
+echo [90m#[0m         [91m您当前的 Windows 版本不受支持[0m           [90m#[0m
+echo [90m#[0m     [91m如果您认为这是一个问题，请在 Github 上打开一个 issue[0m    [90m#[0m
 echo [90m###################################################################[0m
 echo.
 echo.
