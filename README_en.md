@@ -1,10 +1,8 @@
-⚠️ 提示：当前文件有且只能在C盘环境下运行 ⚠️
-
 <h1 align="center">
     Lunar Client Tools
 </h1>
 <p align="center">
-    <strong>Simple Batch Script to Automate Simple <a href="https://lunarclient.com">LunarClient</a> Tasks</strong></br>
+    <strong>Python Tool to Automate Simple <a href="https://lunarclient.com">LunarClient</a> Tasks</strong></br>
     <a href="https://github.com/GrushTom/LunarClientTools/releases">View Releases</a>
     ·
     <a href="https://github.com/GrushTom/LunarClientTools/issues">Report a Bug</a>
@@ -12,13 +10,18 @@
     <a href="https://github.com/GrushTom/LunarClientTools/issues">Request Feature</a>
 
 </p>
+
+<p align="center">
+    <a href=https://github.com/GrushTom/LunarClientTools/releases><img align=center src="https://img.grushtom.com/file/1772988153163_lct_banner.png" width="900" alt="banner"></a></br>
+</p>
+
 <div align="center" style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; margin: 20px 0;">
-    <strong>声明：</strong>您同样可以通过<a href="https://github.com/Vaption/LunarClientTools">https://github.com/Vaption/LunarClientTools</a>来获取此文件，我只是在此基础上修改为了中文版，支持原作者。
+    <strong>Declaration:</strong> You can also get this file through <a href="https://github.com/Vaption/LunarClientTools">https://github.com/Vaption/LunarClientTools</a>, I just modified it to be in Chinese and refactored it to Python implementation, support the original author.
 </div>
 
 ## 💭 What is LCT?
 
-**LunarClientTools** is a simple batch script to automate few tasks related to the client, which </br>you are already able to do manually (by going through the files). The current release of LCT provides the following: </br>
+**LunarClientTools** is a Python-based tool to automate tasks related to LunarClient, which you are already able to do manually (by going through the files). The current release of LCT provides the following: </br>
 
 - [x] Profile Management Options
   - [x] Import Profiles From <a href=https://github.com/Vaption/LunarClientProfiles>the Archive</a>
@@ -32,9 +35,9 @@
 
 ## 📚 Usage
 
-LCT has to be ran as administrator for it to work properly. This is because the entire purpose of the script is to either copy, delete, or write files, or modify Windows registry values, which require administrative privileges. The script is open-source, which means you can check the code before using it.
+LCT has to be ran as administrator for it to work properly. This is because the entire purpose of the tool is to either copy, delete, or write files, or modify Windows registry values, which require administrative privileges. The tool is open-source, which means you can check the code before using it.
 
-**Disclaimer:** LunarClientTools is a batch script, which means it works **only on Windows**, and as of LunarClient's launcher update (which only allows Windows 10 or above), the script also follows the same path.
+**Disclaimer:** LunarClientTools is a Windows tool, which means it works **only on Windows**, and as of LunarClient's launcher update (which only allows Windows 10 or above), the tool also follows the same path.
 
 **LCT is not affiliated with LunarClient.**
 
@@ -62,28 +65,37 @@ LCT has to be ran as administrator for it to work properly. This is because the 
 - **Dedicated GPU**: Sets LunarClient to use your dedicated graphics card for better performance
 - **Integrated GPU**: Sets LunarClient to use your integrated graphics card for power savings
 
-  ## 📝 License
+## 📝 License
 
-  LunarClientTools is licensed under the <a href="https://github.com/Vaption/LunarClientTools/blob/main/LICENSE">MIT license</a>.
+LunarClientTools is licensed under the <a href="https://github.com/GrushTom/LunarClientTools/blob/main/LICENSE">MIT license</a>.
 
-  ## 👨‍💻 Contributing
+## 👨‍💻 Contributing
 
-  I made LunarClientTools without _any_ coding knowledge, based on my findings on how batch works, on Google or with the help of AI. You're allowed to contribute to this project as long as you provide a valid description while submitting your pull request.
+This project has been refactored from a batch script to a Python implementation, resulting in a more structured and maintainable codebase. You're allowed to contribute to this project as long as you provide a valid description while submitting your pull request.
 
-  ## 📖 How to Run
+## 📖 How to Run
+
+### Method 1: Run the Executable (Recommended)
 
 1. Download the latest release from the [Releases](https://github.com/GrushTom/LunarClientTools/releases) page
 2. Extract the downloaded zip file
-3. Right-click on `LunarClientTools.bat` and select "Run as administrator"
+3. Right-click on `LunarClientTools.exe` and select "Run as administrator"
+4. Follow the on-screen instructions to select the desired option
+
+### Method 2: Run the Python Script Directly
+
+1. Ensure your system has Python 3.7 or higher installed
+2. Download the project files
+3. Right-click on `LunarClientTools.py` and select "Run as administrator"
 4. Follow the on-screen instructions to select the desired option
 
 ## ⚠️ Important Notes
 
-- This script requires administrative privileges to function correctly
+- This tool requires administrative privileges to function correctly
 - It only works on Windows 10 and above
 - Always make a backup of your profiles before making any changes
-- The script is provided as-is, without any warranty
+- The tool is provided as-is, without any warranty
 
-  ## 🤝 Support
+## 🤝 Support
 
-  If you encounter any issues or have any questions, please open an issue on the [GitHub repository](https://github.com/GrushTom/LunarClientTools/issues).
+If you encounter any issues or have any questions, please open an issue on the [GitHub repository](https://github.com/GrushTom/LunarClientTools/issues).

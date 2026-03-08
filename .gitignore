@@ -1,0 +1,12 @@
+.trae
+.idea
+__pycache__/
+build/
+dist/
+*.spec
+debug.log
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+Thumbs.db
