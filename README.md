@@ -10,9 +10,11 @@
     <a href="https://github.com/GrushTom/LunarClientTools/issues">请求功能</a>
 
 </p>
+
 <p align="center">
-    <a href=https://github.com/GrushTom/LunarClientTools/releases><img align=center src="https://img.grushtom.com/file/1772988153163_lct_banner.png" width="900" alt="banner"></a></br>
+    <a href=https://github.com/GrushTom/LunarClientTools/releases><img align=center src=".github/lct_banner.png" width="900" alt="banner"></a></br>
 </p>
+
 <div align="center" style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; margin: 20px 0;">
     <strong>声明：</strong>您同样可以通过<a href="https://github.com/Vaption/LunarClientTools">https://github.com/Vaption/LunarClientTools</a>来获取此文件，我只是在此基础上修改为了中文版并重构为 Python 实现，请支持原作者。
 </div>

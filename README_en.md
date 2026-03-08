@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-    <a href=https://github.com/GrushTom/LunarClientTools/releases><img align=center src="https://img.grushtom.com/file/1772988153163_lct_banner.png" width="900" alt="banner"></a></br>
+    <a href=https://github.com/GrushTom/LunarClientTools/releases><img align=center src=".github/lct_banner.png" width="900" alt="banner"></a></br>
 </p>
 
 <div align="center" style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; margin: 20px 0;">
