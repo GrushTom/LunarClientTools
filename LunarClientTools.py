@@ -34,6 +34,13 @@ import shutil
 import subprocess
 import sys
 
+class Color:
+    GREEN = "\033[92m"
+    RED = "\033[91m"
+    CYAN = "\033[96m"
+    YELLOW = "\033[93m"
+    END = "\033[0m"
+
 class LunarClientTools:
     def __init__(self):
         self.home_dir = Path.home()
@@ -64,10 +71,10 @@ class LunarClientTools:
     
     def print_header(self):
         """打印头部信息"""
-        print("###################################################################")
-        print("##                  Lunar Client Tools                           ##")
-        print("##          https://github.com/GrushTom/LunarClientTools         ##")
-        print("###################################################################")
+        print(f"{Color.CYAN}###################################################################{Color.END}")
+        print(f"{Color.CYAN}##                  Lunar Client Tools                           ##{Color.END}")
+        print(f"{Color.CYAN}##          https://github.com/GrushTom/LunarClientTools         ##{Color.END}")
+        print(f"{Color.CYAN}###################################################################{Color.END}")
         print()
     
     def main_menu(self):
@@ -75,16 +82,16 @@ class LunarClientTools:
         while True:
             self.clear_screen()
             self.print_header()
-            print("您想要做什么？")
+            print(f"{Color.YELLOW}您想要做什么？{Color.END}")
             print()
-            print("1. 清除缓存文件")
-            print("2. 导航到 .lunarclient 文件夹")
-            print("3. 配置文件管理选项")
-            print("4. 切换 LunarClient 的 GPU 为独立/集成显卡")
-            print("5. 退出")
+            print(f"{Color.RED}1.{Color.END} 清除缓存文件")
+            print(f"{Color.RED}2.{Color.END} 导航到 .lunarclient 文件夹")
+            print(f"{Color.RED}3.{Color.END} 配置文件管理选项")
+            print(f"{Color.RED}4.{Color.END} 切换 LunarClient 的 GPU 为独立/集成显卡")
+            print(f"{Color.RED}5.{Color.END} 退出")
             print()
             
-            choice = input("请输入 1-5 然后按回车键: ")
+            choice = input(f"{Color.CYAN}请输入 1-5 然后按回车键:{Color.END} ")
             
             if choice == "1":
                 self.clear_cache()
@@ -105,17 +112,17 @@ class LunarClientTools:
         while True:
             self.clear_screen()
             self.print_header()
-            print("配置文件管理选项")
+            print(f"{Color.YELLOW}配置文件管理选项{Color.END}")
             print()
-            print("1. 从存档导入配置文件")
-            print("2. 列出目录中所有现有的配置文件")
-            print("3. 自动检测配置文件并替换当前配置文件管理器")
-            print("4. 手动配置文件管理器生成器")
-            print("5. 导出当前配置文件到桌面")
-            print("6. 取消")
+            print(f"{Color.RED}1.{Color.END} 从存档导入配置文件")
+            print(f"{Color.RED}2.{Color.END} 列出目录中所有现有的配置文件")
+            print(f"{Color.RED}3.{Color.END} 自动检测配置文件并替换当前配置文件管理器")
+            print(f"{Color.RED}4.{Color.END} 手动配置文件管理器生成器")
+            print(f"{Color.RED}5.{Color.END} 导出当前配置文件到桌面")
+            print(f"{Color.RED}6.{Color.END} 取消")
             print()
             
-            choice = input("请输入 1-6 然后按回车键: ")
+            choice = input(f"{Color.CYAN}请输入 1-6 然后按回车键:{Color.END} ")
             
             if choice == "1":
                 self.import_profile_from_archive()
@@ -149,10 +156,10 @@ class LunarClientTools:
                         try:
                             file.unlink()
                         except Exception as e:
-                            print(f"删除文件时出错: {e}")
-                print("成功删除 LunarClient 游戏缓存。")
+                            print(f"{Color.RED}删除文件时出错: {e}{Color.END}")
+                print(f"{Color.GREEN}成功删除 LunarClient 游戏缓存。{Color.END}")
             else:
-                print("缓存文件夹不存在。")
+                print(f"{Color.YELLOW}缓存文件夹不存在。{Color.END}")
         
         print()
         print()
@@ -167,9 +174,9 @@ class LunarClientTools:
         print()
         if self.lunar_dir.exists():
             subprocess.run(["explorer.exe", str(self.lunar_dir)])
-            print("成功在新窗口中打开 .lunarclient。")
+            print(f"{Color.GREEN}成功在新窗口中打开 .lunarclient。{Color.END}")
         else:
-            print(".lunarclient 文件夹不存在。")
+            print(f"{Color.RED}.lunarclient 文件夹不存在。{Color.END}")
         
         print()
         print()
@@ -202,14 +209,14 @@ class LunarClientTools:
             return
         
         # 下载 data.json 文件
-        print("正在从存档下载配置文件信息...")
+        print(f"{Color.CYAN}正在从存档下载配置文件信息...{Color.END}")
         try:
             import urllib.request
             url = "https://raw.githubusercontent.com/Vaption/LunarClientProfiles/main/profiles/data.json"
             filename = self.cache_dir / "data.json"
             urllib.request.urlretrieve(url, filename)
         except Exception as e:
-            print(f"下载配置文件信息时出错: {e}")
+            print(f"{Color.RED}下载配置文件信息时出错: {e}{Color.END}")
             self.pause()
             return
         
@@ -227,13 +234,13 @@ class LunarClientTools:
                     with open(link_file, 'w', encoding='utf-8') as f:
                         f.write(link)
         except Exception as e:
-            print(f"解析配置文件信息时出错: {e}")
+            print(f"{Color.RED}解析配置文件信息时出错: {e}{Color.END}")
             self.pause()
             return
         
         self.clear_screen()
         self.print_header()
-        print("正在扫描当前可用的配置文件...")
+        print(f"{Color.CYAN}正在扫描当前可用的配置文件...{Color.END}")
         
         # 检查配置文件数量
         if self.settings_dir.exists():
@@ -241,26 +248,26 @@ class LunarClientTools:
             total_profiles = len(profiles)
             
             if total_profiles > 7:
-                print("错误：存在超过七个配置文件！")
-                print("允许的最大配置文件数量为八个，无法导入配置文件。")
-                print("请导航到 .lunarclient\settings\game 并在运行命令前删除一些配置文件。")
+                print(f"{Color.RED}错误：存在超过七个配置文件！{Color.END}")
+                print(f"{Color.RED}允许的最大配置文件数量为八个，无法导入配置文件。{Color.END}")
+                print(f"{Color.RED}请导航到 .lunarclient\settings\game 并在运行命令前删除一些配置文件。{Color.END}")
                 self.pause()
                 return
         else:
-            print(".lunarclient 中不存在设置文件夹")
+            print(f"{Color.RED}.lunarclient 中不存在设置文件夹{Color.END}")
             self.pause()
             return
         
         # 显示可用的配置文件
-        print("存档中可用的配置文件：")
+        print(f"{Color.CYAN}存档中可用的配置文件：{Color.END}")
         profile_files = [f for f in self.cache_dir.iterdir() if f.suffix == '.txt' and f.name != 'linkDisplay.txt']
         profile_names = [f.stem for f in profile_files]
         
         for i, name in enumerate(profile_names, 1):
-            print(f"{i}. {name}")
+            print(f"{Color.RED}{i}.{Color.END} {name}")
         
         # 选择配置文件
-        choice = input("请输入您要导入的配置文件编号: ")
+        choice = input(f"{Color.CYAN}请输入您要导入的配置文件编号: {Color.END}")
         
         try:
             index = int(choice) - 1
@@ -272,7 +279,7 @@ class LunarClientTools:
                     download_link = f.read().strip()
                 
                 # 下载并解压配置文件
-                print("尝试从存档下载配置文件...")
+                print(f"{Color.CYAN}尝试从存档下载配置文件...{Color.END}")
                 try:
                     import zipfile
                     import io
@@ -295,18 +302,18 @@ class LunarClientTools:
                         
                         zip_ref.extractall(extract_path)
                     
-                    print("配置文件导入成功，尝试生成新的 profile_manager.json...")
+                    print(f"{Color.GREEN}配置文件导入成功，尝试生成新的 profile_manager.json...{Color.END}")
                     self.auto_generate_profile_manager()
                 except Exception as e:
-                    print(f"下载或解压配置文件时出错: {e}")
+                    print(f"{Color.RED}下载或解压配置文件时出错: {e}{Color.END}")
                     self.pause()
                     return
             else:
-                print("所选配置文件不存在。正在退出...")
+                print(f"{Color.RED}所选配置文件不存在。正在退出...{Color.END}")
                 self.pause()
                 return
         except ValueError:
-            print("无效的输入。正在退出...")
+            print(f"{Color.RED}无效的输入。正在退出...{Color.END}")
             self.pause()
             return
     
@@ -314,17 +321,17 @@ class LunarClientTools:
         """列出目录中所有现有的配置文件"""
         self.clear_screen()
         print()
-        print("正在扫描您的配置文件目录...")
+        print(f"{Color.CYAN}正在扫描您的配置文件目录...{Color.END}")
         
         if self.settings_dir.exists():
             profiles = [d.name for d in self.settings_dir.iterdir() if d.is_dir()]
             count = len(profiles)
-            print(f"您总共有 {count}/8 个配置文件：")
+            print(f"{Color.YELLOW}您总共有 {count}/8 个配置文件：{Color.END}")
             print()
             for profile in profiles:
                 print(f"- {profile}")
         else:
-            print(".lunarclient 中不存在设置文件夹")
+            print(f"{Color.RED}.lunarclient 中不存在设置文件夹{Color.END}")
         
         print()
         print()
@@ -336,12 +343,12 @@ class LunarClientTools:
         self.clear_screen()
         
         if not self.settings_dir.exists():
-            print(".lunarclient 中不存在设置文件夹")
-            print("LCT 无法在您的设置目录中检测到任何配置文件。")
+            print(f"{Color.RED}.lunarclient 中不存在设置文件夹{Color.END}")
+            print(f"{Color.RED}LCT 无法在您的设置目录中检测到任何配置文件。{Color.END}")
             self.pause()
             return
         
-        print("正在扫描设置文件夹...")
+        print(f"{Color.CYAN}正在扫描设置文件夹...{Color.END}")
         
         # 统计配置文件数量
         profiles = [d for d in self.settings_dir.iterdir() if d.is_dir()]
@@ -349,24 +356,24 @@ class LunarClientTools:
         
         # 检查配置文件数量是否超过8个
         if total_profiles > 8:
-            print("错误：存在超过八个配置文件！")
-            print("请导航到 .lunarclient\settings\game 并在运行命令前删除一些配置文件。")
+            print(f"{Color.RED}错误：存在超过八个配置文件！{Color.END}")
+            print(f"{Color.RED}请导航到 .lunarclient\settings\game 并在运行命令前删除一些配置文件。{Color.END}")
             # 清理缓存
             self._clean_cache()
             self.pause()
             return
         
-        print(f"在设置文件夹中找到 {total_profiles} 个配置文件。")
-        print("正在终止启动器进程...")
+        print(f"{Color.YELLOW}在设置文件夹中找到 {total_profiles} 个配置文件。{Color.END}")
+        print(f"{Color.CYAN}正在终止启动器进程...{Color.END}")
         
         # 终止 Lunar Client 进程
         try:
             subprocess.run(["taskkill", "/im", "Lunar Client.exe", "/f"], capture_output=True, text=True)
         except Exception as e:
-            print(f"终止进程时出错: {e}")
+            print(f"{Color.RED}终止进程时出错: {e}{Color.END}")
         
-        print("任务完成。")
-        print("正在生成配置文件...")
+        print(f"{Color.GREEN}任务完成。{Color.END}")
+        print(f"{Color.CYAN}正在生成配置文件...{Color.END}")
         
         # 生成 profile_manager.json
         profiles_data = []
@@ -387,10 +394,10 @@ class LunarClientTools:
         try:
             with open(profile_manager_path, 'w', encoding='utf-8') as f:
                 json.dump(profiles_data, f, indent=2, ensure_ascii=False)
-            print("成功生成并替换 profile_manager.json")
-            print("操作成功。")
+            print(f"{Color.GREEN}成功生成并替换 profile_manager.json{Color.END}")
+            print(f"{Color.GREEN}操作成功。{Color.END}")
         except Exception as e:
-            print(f"生成配置文件时出错: {e}")
+            print(f"{Color.RED}生成配置文件时出错: {e}{Color.END}")
         
         # 清理缓存
         self._clean_cache()
@@ -400,33 +407,33 @@ class LunarClientTools:
         """手动配置文件管理器生成器"""
         self.clear_screen()
         
-        print("请输入要添加的配置文件总数（最大=8）：")
+        print(f"{Color.CYAN}请输入要添加的配置文件总数（最大=8）：{Color.END}")
         total_profiles_input = input()
         
         try:
             total_profiles = int(total_profiles_input)
             if total_profiles > 8:
-                print("错误：超过最大配置文件数量。请输入 1 到 8 之间的数字。")
+                print(f"{Color.RED}错误：超过最大配置文件数量。请输入 1 到 8 之间的数字。{Color.END}")
                 self.pause()
                 return
             elif total_profiles < 1:
-                print("错误：配置文件数量必须至少为 1。")
+                print(f"{Color.RED}错误：配置文件数量必须至少为 1。{Color.END}")
                 self.pause()
                 return
         except ValueError:
-            print("错误：无效的输入。请输入一个数字。")
+            print(f"{Color.RED}错误：无效的输入。请输入一个数字。{Color.END}")
             self.pause()
             return
         
-        print("正在生成配置文件...")
+        print(f"{Color.CYAN}正在生成配置文件...{Color.END}")
         print()
         
         # 收集配置文件信息
         profiles_data = []
         for i in range(1, total_profiles + 1):
-            print(f"配置文件 {i}")
-            profile_name = input("请输入配置文件 %i 的名称：" % i)
-            display_name = input("请输入配置文件 %i 的显示名称：" % i)
+            print(f"{Color.YELLOW}配置文件 {i}{Color.END}")
+            profile_name = input(f"{Color.CYAN}请输入配置文件 %i 的名称：{Color.END} " % i)
+            display_name = input(f"{Color.CYAN}请输入配置文件 %i 的显示名称：{Color.END} " % i)
             
             profile_data = {
                 "name": profile_name,
@@ -444,9 +451,9 @@ class LunarClientTools:
             with open(desktop_path, 'w', encoding='utf-8') as f:
                 json.dump(profiles_data, f, indent=2, ensure_ascii=False)
             print()
-            print("成功在您的桌面上生成 profile_manager.json。")
+            print(f"{Color.GREEN}成功在您的桌面上生成 profile_manager.json。{Color.END}")
         except Exception as e:
-            print(f"生成配置文件时出错: {e}")
+            print(f"{Color.RED}生成配置文件时出错: {e}{Color.END}")
         
         print()
         print()
@@ -459,7 +466,7 @@ class LunarClientTools:
         print()
         print()
         
-        confirm = input("确定要继续吗？按 Y 继续，按 C 取消: ")
+        confirm = input(f"{Color.CYAN}确定要继续吗？按 Y 继续，按 C 取消: {Color.END}")
         if confirm.lower() != "y":
             return
         
@@ -470,7 +477,7 @@ class LunarClientTools:
                 shutil.rmtree(desktop_folder)
             desktop_folder.mkdir(parents=True, exist_ok=True)
         except Exception as e:
-            print(f"创建文件夹时出错: {e}")
+            print(f"{Color.RED}创建文件夹时出错: {e}{Color.END}")
             self.pause()
             return
         
@@ -509,15 +516,15 @@ class LunarClientTools:
                         except Exception as e:
                             pass
                 
-                print("成功将您的配置文件复制到桌面。")
-                print(f"文件路径：{desktop_folder}")
+                print(f"{Color.GREEN}成功将您的配置文件复制到桌面。{Color.END}")
+                print(f"{Color.YELLOW}文件路径：{desktop_folder}{Color.END}")
                 
                 # 打开文件夹
                 subprocess.run(["explorer.exe", str(desktop_folder)])
             except Exception as e:
-                print(f"复制文件时出错: {e}")
+                print(f"{Color.RED}复制文件时出错: {e}{Color.END}")
         else:
-            print(".lunarclient 中不存在设置文件夹")
+            print(f"{Color.RED}.lunarclient 中不存在设置文件夹{Color.END}")
         
         print()
         print()
@@ -531,20 +538,20 @@ class LunarClientTools:
         print()
         print()
         
-        choice = input("您想切换到哪种图形处理器？按 D 选择独立显卡，按 I 选择集成显卡: ")
+        choice = input(f"{Color.CYAN}您想切换到哪种图形处理器？按 D 选择独立显卡，按 I 选择集成显卡: {Color.END}")
         
         if choice.upper() == "D":
             # 切换到独立显卡
-            confirm = input("确定要继续吗？按 Y 继续，按 C 取消: ")
+            confirm = input(f"{Color.CYAN}确定要继续吗？按 Y 继续，按 C 取消: {Color.END}")
             if confirm.lower() == "y":
                 self.set_gpu_preference(2, "高性能模式")
         elif choice.upper() == "I":
             # 切换到集成显卡
-            confirm = input("确定要继续吗？按 Y 继续，按 C 取消: ")
+            confirm = input(f"{Color.CYAN}确定要继续吗？按 Y 继续，按 C 取消: {Color.END}")
             if confirm.lower() == "y":
                 self.set_gpu_preference(1, "节能模式")
         else:
-            print("无效的选择。")
+            print(f"{Color.RED}无效的选择。{Color.END}")
             self.pause()
     
     def set_gpu_preference(self, preference, mode_name):
@@ -563,11 +570,11 @@ class LunarClientTools:
                 winreg.SetValueEx(key, str(javaw_path), 0, winreg.REG_SZ, f"GpuPreference={preference};")
                 winreg.CloseKey(key)
                 
-                print(f"成功将 LunarClient 的 GPU 切换到{mode_name}。")
+                print(f"{Color.GREEN}成功将 LunarClient 的 GPU 切换到{mode_name}。{Color.END}")
             except Exception as e:
-                print(f"修改注册表时出错: {e}")
+                print(f"{Color.RED}修改注册表时出错: {e}{Color.END}")
         else:
-            print("LCT 无法找到 javaw.exe，请重新启动游戏以下载该文件。")
+            print(f"{Color.RED}LCT 无法找到 javaw.exe，请重新启动游戏以下载该文件。{Color.END}")
         
         print()
         print()
